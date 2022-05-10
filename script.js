@@ -1,8 +1,10 @@
 const yourShip = document.querySelector('.player-shooter');
 const playArea = document.querySelector('#main-play-area');
 const aliensImg = ['img/monster-1.png', 'img/monster-2.png', 'img/monster-3.png'];
+const instructionsText = document.querySelector('.game-instructions');
+const startButton = document.querySelector('.start-button');
 
-//movimento e tiro da nave
+//função mover e atirar
 function flyShip(event) {
     if(event.key === 'ArrowUp') {
         event.preventDefault();
@@ -127,4 +129,19 @@ function checkLaserCollision(laser, alien) {
     } else {
         return false;
     }
+}
+
+//Iniciar
+startButton.addEventListener('click', (event) => {
+    playGame();
+})
+
+//Função playGame
+function playGame() {
+    startButton.style.display = 'none';
+    instructionsText.style.display = 'none';
+    window.addEventListener('keydown', flyShip);
+    alienInterval = setInterval(() => {
+        createAliens();
+    }, 2000);
 }
